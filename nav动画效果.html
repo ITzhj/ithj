@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		*{padding:0;margin:0;}
+		ul{
+			list-style: none;
+			position: absolute;
+			z-index:1;
+		}
+		#nav{
+			width:800px;
+			height:42px;			
+			margin:100px auto;
+			background-color:#fff;
+			border-radius: 5px;
+			position: relative;
+		}
+		body{
+			background-color: yellow;
+		}
+		.nav li{
+			float:left;
+			width:83px;
+			height:42px;
+			line-height: 42px;
+			text-align: center;
+			cursor:pointer;
+			
+			/*color:#000;*/
+		}
+		.bg{
+			width:83px;
+			height: 42px;
+			position: absolute;
+			z-index:0;
+			top: 0;
+			left: 0;
+			background-color:red;
+		}
+		
+	</style>
+</head>
+<body>
+	<div id="nav" class="nav">
+		<span class="bg" id="bg"></span>
+		<ul>
+			<li>郑华剑</li>
+			<li>郑华剑</li>
+			<li>郑华剑</li>
+			<li>郑华剑</li>
+			<li>郑华剑</li>
+			<li>郑华剑</li>
+			<li>郑华剑</li>
+			<li>郑华剑</li>
+		</ul>
+
+	</div>
+	<script>
+
+	var bg = document.getElementById("bg");  //背景框
+	var nav = document.getElementById("nav");
+	var lis = nav.children[1].children;
+	var current = 0;//存放点击时offsetLeft值
+	// alert(lis.length);
+	for (var i=0;i<lis.length;i++){
+		lis[i].onmouseover = function(){
+			// alert(this.offsetLeft);
+			target = this.offsetLeft;
+		}
+		lis[i].onmouseout = function(){
+			target = current;
+		}
+		lis[i].onclick = function(){
+			current = this.offsetLeft;
+		}
+	}
+
+	//缓动公式
+	var leader = 0,target = 0;
+	setInterval(function(){
+		leader = leader + (target - leader) / 10;
+		bg.style.left = leader + "px";
+	},10);
+	</script>
+</body>
+</html>
